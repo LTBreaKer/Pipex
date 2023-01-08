@@ -6,7 +6,7 @@
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 21:19:47 by aharrass          #+#    #+#             */
-/*   Updated: 2022/12/06 14:05:18 by aharrass         ###   ########.fr       */
+/*   Updated: 2023/01/08 23:46:45 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-# include "../header/push_swap.h"
 
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
