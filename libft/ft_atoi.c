@@ -6,7 +6,7 @@
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:54:00 by aharrass          #+#    #+#             */
-/*   Updated: 2022/12/06 14:08:21 by aharrass         ###   ########.fr       */
+/*   Updated: 2023/01/08 23:48:39 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ long long	ft_atoi(const char *str)
 	while (ft_isdigit(str[i]))
 	{
 		j = j * 10 + str[i++] - '0';
-		if (j > 9223372036854775807)
-			exit_error();
+		if (j > 9223372036854775807 && s == 1)
+			return (-1);
+		if (j > 9223372036854775807 && s == -1)
+			return (0);
 	}
 	return (j * s);
 }
