@@ -14,7 +14,8 @@ OB_PATH = ./obj/
 
 INCLUDE = -I ./header/pipex.h
 
-SR =	\
+SR =	pipex.c	\
+			error.c \
 
 SRCS = ${addprefix ${SR_PATH}, ${SR}}
 
