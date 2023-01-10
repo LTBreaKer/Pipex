@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 12:43:12 by aharrass          #+#    #+#             */
-/*   Updated: 2023/01/09 23:54:38 by aharrass         ###   ########.fr       */
+/*   Created: 2023/01/09 23:46:42 by aharrass          #+#    #+#             */
+/*   Updated: 2023/01/10 03:49:21 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../header/pipex.h"
 
-char	*ft_strjoin(char *s1, char const *s2)
+void	free_double_arr(char **arr)
 {
-	size_t	len;
-	char	*res;
-	size_t	i;
-	size_t	j;
+	int	i;
 
 	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	res = (malloc(len * (sizeof (*res)) + 1));
-	if (!res)
-		return (NULL);
-	while (s1[j])
-		res[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		res[i++] = s2[j++];
-	res[i] = 0;
-	free(s1);
-	return (res);
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+void	free_ch(t_pipex *pipex)
+{
+	int	i;
+
+	i = 0;
+	while (pipex->cmd_args[i])
+		free(pipex->cmd_args[i++]);
+	i = 0;
+	while (pipex->cmd_paths[i])
+		free(pipex->cmd_paths[i++]);
+	free(pipex->cmd_args);
+	free(pipex->cmd_paths);
+	free(pipex->cmd);
 }

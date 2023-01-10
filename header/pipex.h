@@ -6,7 +6,7 @@
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:04:03 by aharrass          #+#    #+#             */
-/*   Updated: 2023/01/09 21:41:19 by aharrass         ###   ########.fr       */
+/*   Updated: 2023/01/10 03:45:41 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ typedef struct st
 	int		id2;
 	char	**cmd_paths;
 	char	*cmd;
+	char	**cmd_args;
 }			t_pipex;
 
 void		err_msg(char *msg);
+void		free_double_arr(char **arr);
+void		free_ch(t_pipex *pipex);
 
 #endif

@@ -16,6 +16,7 @@ INCLUDE = -I ./header/pipex.h
 
 SR =	pipex.c	\
 			error.c \
+			free.c  \
 
 SRCS = ${addprefix ${SR_PATH}, ${SR}}
 
