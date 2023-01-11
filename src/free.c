@@ -6,7 +6,7 @@
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 23:46:42 by aharrass          #+#    #+#             */
-/*   Updated: 2023/01/10 03:49:21 by aharrass         ###   ########.fr       */
+/*   Updated: 2023/01/11 03:29:40 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,29 @@ void	free_ch(t_pipex *pipex)
 	int	i;
 
 	i = 0;
-	while (pipex->cmd_args[i])
-		free(pipex->cmd_args[i++]);
+	while (pipex->cmd_paths[i])
+		free(pipex->cmd_paths[i++]);
+	free(pipex->cmd_paths);
+}
+
+void	free_p(t_pipex *pipex)
+{
+	int	i;
+
 	i = 0;
 	while (pipex->cmd_paths[i])
 		free(pipex->cmd_paths[i++]);
-	free(pipex->cmd_args);
 	free(pipex->cmd_paths);
-	free(pipex->cmd);
+}
+
+void	close_pipe(int fd[])
+{
+	close(fd[0]);
+	close(fd[1]);
+}
+
+void	close_files(int infile, int outfile)
+{
+	close(infile);
+	close(outfile);
 }

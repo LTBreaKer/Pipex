@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 12:43:12 by aharrass          #+#    #+#             */
-/*   Updated: 2023/01/11 02:37:09 by aharrass         ###   ########.fr       */
+/*   Created: 2023/01/11 02:56:27 by aharrass          #+#    #+#             */
+/*   Updated: 2023/01/11 02:56:40 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin2(char *s1, char const *s2)
 {
 	size_t	len;
 	char	*res;
@@ -33,6 +33,5 @@ char	*ft_strjoin(char *s1, char const *s2)
 	while (s2[j])
 		res[i++] = s2[j++];
 	res[i] = 0;
-	free(s1);
 	return (res);
 }

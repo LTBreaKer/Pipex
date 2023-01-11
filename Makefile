@@ -26,7 +26,7 @@ all: ${NAME}
 
 ${OB_PATH}%.o : ${SR_PATH}%.c
 			@mkdir -p ${OB_PATH}
-			cc -c $< -o $@
+			cc -c ${CFLAGS} $< -o $@
 
 ${NAME}:	${OBJS}
 			make -C ${LIBFT}
