@@ -6,7 +6,7 @@
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:33:25 by aharrass          #+#    #+#             */
-/*   Updated: 2023/01/11 03:16:48 by aharrass         ###   ########.fr       */
+/*   Updated: 2023/01/15 23:21:48 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,68 +18,28 @@ void	err_msg(char *msg)
 	exit(1);
 }
 
-void	err(char *msg)
+void	err(char *msg, char *p2, int errn)
 {
 	write(2, msg, ft_strlen(msg));
-	exit(1);
+	write(2, p2, ft_strlen(p2));
+	write(2, "\n", 1);
+	exit(errn);
 }
 
-void	check_cmd1(t_pipex pipex, char *av, char **paths)
+void	parrent(t_pipex pipex, char **av, char **envp)
 {
-	int		i;
-	char	**tmp;
-
-	i = 0;
-	tmp = ft_split(av, ' ');
-	while (paths[i])
+	pipex.id2 = fork();
+	if (pipex.id2 == 0)
+		second_child(pipex, av, envp);
+	(close_pipe(pipex.pipe), close_files(pipex.infile, pipex.outfile));
+	waitpid(pipex.id1, &pipex.status1, 0);
+	if (WIFEXITED(pipex.status1))
+		pipex.status_code1 = WEXITSTATUS(pipex.status1);
+	waitpid(pipex.id2, &pipex.status2, 0);
+	if (WIFEXITED(pipex.status2))
 	{
-		pipex.cmd = ft_strjoin2(paths[i], "/");
-		pipex.cmd = ft_strjoin(pipex.cmd, tmp[0]);
-		if (access(pipex.cmd, F_OK) == 0)
-			break ;
-		free(pipex.cmd);
-		i++;
+		pipex.status_code2 = WEXITSTATUS(pipex.status2);
+		if (pipex.status_code2)
+			exit(pipex.status_code2);
 	}
-	free_double_arr(tmp);
-	free_double_arr(paths);
-	if (access(pipex.cmd, F_OK) == 0)
-	{
-		free(pipex.cmd);
-		return ;
-	}
-	perror("Error");
-	exit(-1);
-}
-
-void	check_cmd2(t_pipex pipex, char *av, char **paths)
-{
-	int		i;
-	char	**tmp;
-
-	i = 0;
-	tmp = ft_split(av, ' ');
-	while (paths[i])
-	{
-		pipex.cmd = ft_strjoin2(paths[i], "/");
-		pipex.cmd = ft_strjoin(pipex.cmd, tmp[0]);
-		if (access(pipex.cmd, F_OK) == 0)
-			break ;
-		free(pipex.cmd);
-		i++;
-	}
-	free_double_arr(tmp);
-	free_double_arr(paths);
-	if (access(pipex.cmd, F_OK) == 0)
-	{
-		free(pipex.cmd);
-		return ;
-	}
-	perror("Error");
-	exit(-1);
-}
-
-void	check_cmd(t_pipex pipex, char **av, char **envp)
-{
-	check_cmd1(pipex, av[2], find_paths(envp));
-	check_cmd2(pipex, av[3], find_paths(envp));
 }

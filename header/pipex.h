@@ -6,7 +6,7 @@
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:04:03 by aharrass          #+#    #+#             */
-/*   Updated: 2023/01/11 03:22:59 by aharrass         ###   ########.fr       */
+/*   Updated: 2023/01/15 23:14:02 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@ typedef struct st
 	char	**cmd_paths;
 	char	*cmd;
 	char	**cmd_args;
+	int		status1;
+	int		status2;
+	int		status_code1;
+	int		status_code2;
 }			t_pipex;
 
 void		err_msg(char *msg);
 void		free_double_arr(char **arr);
 void		free_ch(t_pipex *pipex);
 void		free_p(t_pipex *pipex);
-void		err(char *msg);
-void		check_cmd1(t_pipex pipex, char *av, char **paths);
-void		check_cmd2(t_pipex pipex, char *av, char **paths);
-void		check_cmd(t_pipex pipex, char **av, char **envp);
+void		err(char *msg, char *p2, int errn);
 char		**find_paths(char **envp);
 void		close_pipe(int fd[]);
 void		close_files(int infile, int outfile);
-
+void		parrent(t_pipex pipex, char **av, char **envp);
+void		second_child(t_pipex pipex, char **av, char **envp);
 #endif
