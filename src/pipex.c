@@ -6,7 +6,7 @@
 /*   By: aharrass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 00:08:39 by aharrass          #+#    #+#             */
-/*   Updated: 2023/01/15 23:21:09 by aharrass         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:51:24 by aharrass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void	first_child(t_pipex pipex, char **av, char **envp)
 	if (!pipex.cmd)
 		err("command not found: ", av[2], 127);
 	pipex.cmd_args = ft_split(av[2], ' ');
-	execve(pipex.cmd, pipex.cmd_args, envp);
+	if (execve(pipex.cmd, pipex.cmd_args, envp) == -1)
+		perror("");
+	exit(126);
 }
 
 void	second_child(t_pipex pipex, char **av, char **envp)
@@ -68,7 +70,9 @@ void	second_child(t_pipex pipex, char **av, char **envp)
 	if (!pipex.cmd)
 		err("command not found: ", av[3], 127);
 	pipex.cmd_args = ft_split(av[3], ' ');
-	execve(pipex.cmd, pipex.cmd_args, envp);
+	if (execve(pipex.cmd, pipex.cmd_args, envp) == -1)
+		perror(pipex.cmd);
+	exit(126);
 }
 
 char	**find_paths(char **envp)
